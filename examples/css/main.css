@@ -1,0 +1,77 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+/* One */
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eef442;
+  --main-color: #f44242;
+}
+
+.item:nth-child(2n+1) {
+  color: var(--main-color);
+}
+
+/* Two */
+:root {
+  --root-color: #41f479;
+}
+
+.item__two:nth-child(2n+1) {
+  color: var(--root-color);
+}
+
+/* Three */
+.three {
+  --special-color: #4155f4;
+}
+
+.three__two {
+  --special-color: #e57e00;
+}
+
+.three div {
+  height: auto;
+  text-align: center;
+  width: 100%;
+  color: var(--special-color);
+}
+
+/* Four */
+.four div {
+  height: auto;
+  text-align: center;
+  width: 100%;
+}
+
+.four__one {
+  color: var(--special-color, #5f00e5);
+}
+
+.four__two {
+  color: var(--special-color, var(--other-color, #00e5d9));
+}
+
+/* Six */
+
+.item__six:nth-child(2n+1) {
+  color: var(--root-color);
+}
+
+@media (orientation: landscape) and (pointer: coarse) {
+  :root {
+    --root-color: #f442f1;
+  }
+}
+
+@media (orientation: portrait) and (pointer: coarse) {
+  :root {
+    --root-color: #4146f4;
+  }
+}
