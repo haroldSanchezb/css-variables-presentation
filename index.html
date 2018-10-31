@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>CSS Variables</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<img data-src="https://pbs.twimg.com/profile_images/980908987548913664/1QOa15sA_400x400.jpg">
+					<h2>CSSConf Review</h2>
+        </section>
+        <section>
+          <h2>Before CSS variables</h2>
+          <p class="fragment">A lot of repeated values</p>
+          <p class="fragment">
+					<img data-src="/img/meme.jpeg">            
+          </p>
+        </section>
+				<section>
+          <h2>CSS variables</h2>
+          <p>Are entities defined by CSS</p>
+          <p class="fragment">Contain specific values to be reused</p>
+          <p>
+            <span class="fragment">Are set using custom property notation</span>
+            <pre class="fragment"><code class="hljs" style="word-wrap: break-word;">--my-var: value;</code></pre>
+          </p>
+          <p>
+            <span class="fragment">Are accessed using the <strong>var()</strong> function</span>
+            <pre class="fragment"><code class="hljs" style="word-wrap: break-word;">color: var(--main-color);</code></pre>
+          </p>
+        </section>
+        <section>
+          <section>
+            <h2>Basic usage</h2>
+          </section>
+          <section>
+            <p>Declaring a variable:</p>
+            <pre><code class="hljs" data-trim>
+              element {
+                --main-bg-color: green;
+              }
+            </code></pre>
+          </section>
+          <section>
+            <p>Using the variable:</p>
+            <pre><code class="hljs" data-trim>
+                element {
+                  background-color: var(--main-bg-color);
+                }
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Global variables</h2>
+            <p class="fragment">Reduce the need for repetition</p>
+            <p class="fragment">Declare variables on <strong>:root</strong> pseudo-class</p>
+          </section>
+          <section>
+            <p>Using :root pseudo-class:</p>
+            <pre><code class="hljs" data-trim>
+              :root {
+                --body-font-size: 14px;
+              }
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Fallback values</h2>
+            <p class="fragment">If the variable is not defined yet</p>
+            <p class="fragment">Receives two arguments</p>
+          </section>
+          <section>
+            <p>Basic usage:</p>
+            <pre><code class="hljs" data-trim>
+              .two {
+                color: var(--my-var, red);
+                /* Red if --my-var is not defined */
+              }
+            </code></pre>
+          </section>
+          <section>
+            <p>Multiple variables:</p>
+            <pre><code class="hljs" data-trim>
+              .three {
+                background-color: var(--my-var, var(--my-background, pink));
+                /* pink if my-var and --my-background are not defined */
+              }
+            </code></pre>
+          </section>
+          <section>
+            <p>Bad usage:</p>
+            <pre><code class="hljs" data-trim>
+              .three {
+                background-color: var(--my-var, --my-background, pink);
+                /* Invalid: "--my-background, pink" */
+              }
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <h2>Invalid variables</h2>
+          <p class="fragment">When the browser encounters an invalid <strong>var()</strong> substitution</p>
+          <p class="fragment">The initial or inherited value of the property is used</p>
+        </section>
+        <section>
+          <section>
+            <h2>Media Queries</h2>
+            <p class="fragment">God save the <strong>:root</strong></p>
+            <p class="fragment">Just setup the :root pseudo-class in your media query</p>
+          </section>
+          <section>
+            <p>Usage:</p>
+            <pre><code class="hljs" data-trim>
+              :root {
+                --root-color: red;
+              }
+
+              .six {
+                background-color: var(--root-color);
+              }
+
+              @media (orientation: portrait) and (pointer: coarse) {
+                :root {
+                  --root-color: green;
+                }
+              }
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <h2>Final Demo</h2>
+        </section>
+        <section>
+          <section>
+            <h2>So...</h2>
+            <p class="fragment">You can use them <strong>without the need of a preprocessor</strong></p>
+            <p class="fragment"><strong>They cascade.</strong> You can set a variable inside any selector to set or override its current value</p>
+            <p class="fragment">When their values change (e.g. media query or other state), <strong>the browser repaints as needed</strong></p>
+            <p class="fragment">You can access and <strong>manipulate them in JavaScript</strong></p>
+          </section>
+          <section>
+            <h2>What you are waiting for use it!</h2>
+            <p class="fragment"><img data-src="/img/meme2.jpg"></p>
+          </section>
+        </section>
+        <section>
+            <h2>Que poder!</h2>
+            <p class="fragment">Gracias!</p>
+          </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
